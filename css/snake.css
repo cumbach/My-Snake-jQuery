@@ -1,0 +1,96 @@
+html, body, figure, figcaption, ul, li, h1 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  text-align: inherit;
+}
+
+ul {
+  list-style: none;
+}
+.snake2 {
+  background: black;
+}
+
+body {
+  font-family: sans-serif;
+  text-align: center;
+  font-weight: bold;
+
+}
+
+over {
+  font-size: 60px;
+  margin: 30px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+h1 {
+  font-size: 60px;
+  margin: 30px;
+}
+
+.snake-game {
+  background: white;
+  -webkit-background-size: cover;
+}
+
+figure {
+  display: inline-block;
+  border: 10px solid black;
+  /*background: url("Umbach.jpg");
+  -webkit-background-size: cover;*/
+
+}
+
+.count {
+  font-size: 40px;
+  margin: 0;
+  height: 40px;
+  width: 420px;
+  float: left;
+  background: blue;
+}
+
+
+ul:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+li {
+  list-style: none;
+  float: left;
+  width: 20px;
+  height: 20px;
+}
+
+.apple {
+  background: green;
+  /*width:40px;
+  height: 40px;*/
+  /*overflow: hidden;*/
+
+  object-fit: cover;
+  -webkit-background-size: cover;
+}
+.head {
+  background: blue;
+  /*clip: rect(5px,5px,5px,5px)*/
+  -webkit-background-size: cover;
+  /*left: 50%;*/
+}
+
+.mine {
+  background: purple;
+}
+
+
+.snake {
+  /*background: green;*/
+  background: red;
+  /*clip: rect(5px,5px,5px,5px)*/
+  -webkit-background-size: cover;
+}
