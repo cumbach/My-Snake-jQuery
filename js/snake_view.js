@@ -9,6 +9,7 @@ var View = function($el) {
 };
 
 var KEYCODES = {
+  32: "SPACE",
   37: "W",
   38: "N",
   39: "E",
@@ -16,6 +17,11 @@ var KEYCODES = {
 };
 
 View.prototype.handleKeyEvent = function (event) {
+  if (KEYCODES[event.keyCode] === "SPACE") {
+    this.$el.empty();
+    window.clearInterval(this.intervalID);
+    new View(this.$el);
+  }
   this.board.snake.turn(KEYCODES[event.keyCode]);
 };
 
@@ -110,7 +116,7 @@ View.prototype.step = function () {
   } else {
     this.$el.empty();
     this.$over = $('<over>');
-    this.$over.html("Game Over\nFinal Score: " + this.board.count);
+    this.$over.html("Game Over <br/> Final Score: " + this.board.count + "<br/><br/> Press Space to restart");
     this.$el.append(this.$over);
     this.$el.removeClass();
 

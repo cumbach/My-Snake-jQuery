@@ -67,6 +67,7 @@
 	};
 	
 	var KEYCODES = {
+	  32: "SPACE",
 	  37: "W",
 	  38: "N",
 	  39: "E",
@@ -74,6 +75,11 @@
 	};
 	
 	View.prototype.handleKeyEvent = function (event) {
+	  if (KEYCODES[event.keyCode] === "SPACE") {
+	    this.$el.empty();
+	    window.clearInterval(this.intervalID);
+	    new View(this.$el);
+	  }
 	  this.board.snake.turn(KEYCODES[event.keyCode]);
 	};
 	
@@ -168,7 +174,7 @@
 	  } else {
 	    this.$el.empty();
 	    this.$over = $('<over>');
-	    this.$over.html("Game Over\nFinal Score: " + this.board.count);
+	    this.$over.html("Game Over <br/> Final Score: " + this.board.count + "<br/><br/> Press Space to restart");
 	    this.$el.append(this.$over);
 	    this.$el.removeClass();
 	
@@ -254,7 +260,7 @@
 	function Snake (board) {
 	  this.board = board;
 	  this.direction = "E";
-	  this.segments = [new Coord(0,0), new Coord(0,1), new Coord(0,2)];
+	  this.segments = [new Coord(3,3), new Coord(3,4), new Coord(3,5)];
 	}
 	
 	Snake.prototype.head = function () {

@@ -62,7 +62,7 @@ Apple.prototype.replace = function () {
 function Snake (board) {
   this.board = board;
   this.direction = "E";
-  this.segments = [new Coord(0,0), new Coord(0,1), new Coord(0,2)];
+  this.segments = [new Coord(3,3), new Coord(3,4), new Coord(3,5)];
 }
 
 Snake.prototype.head = function () {
