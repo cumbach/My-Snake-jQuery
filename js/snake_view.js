@@ -5,7 +5,7 @@ var View = function($el) {
   this.board = new Board();
   this.setupViewGrid();
   $(window).on("keydown", this.handleKeyEvent.bind(this));
-  this.intervalID = window.setInterval(this.step.bind(this), 100);
+  this.intervalID = window.setInterval(this.step.bind(this), 110);
 };
 
 var KEYCODES = {
@@ -43,12 +43,12 @@ View.prototype.setupViewGrid = function () {
   this.$h1 = $('<h1>');
   this.$el.append(this.$h1);
   this.$h1.addClass("count");
-  this.$h1.text("SCORE: 0");
+  this.$h1.text("Black Score: 0");
 
   this.$h1_2 = $('<h1>');
   this.$el.append(this.$h1_2);
   this.$h1_2.addClass("count");
-  this.$h1_2.text("Red Snake: 0");
+  this.$h1_2.text("Red Score: 0");
 };
 
 View.prototype.renderApple = function () {
@@ -71,26 +71,9 @@ View.prototype.renderApple = function () {
 View.prototype.viewRender = function () {
   this.$li.removeClass();
   var view = this;
-  var segments = this.board.snake.segments;
 
-  segments.forEach(function(segment){
-    for (var i = 0; i <= 20; i++) {
-      for (var j = 0; j <= 20; j++) {
-        if (segment.x === i && segment.y === j) {
-          this.$snake = $("li[pos='" + i + "," + j + "']");
-          this.$snake.addClass("snake2");
-        }
-        if (view.board.snake.head().x === i && view.board.snake.head().y === j) {
-          this.$head = $("li[pos='" + i + "," + j + "']");
-          this.$head.removeClass('snake2');
-          this.$head.addClass("head");
-        }
-      }
-    }
-  });
 
   var segments2 = this.board.snake2.segments;
-
   segments2.forEach(function(segment){
     for (var i = 0; i <= 20; i++) {
       for (var j = 0; j <= 20; j++) {
@@ -107,6 +90,23 @@ View.prototype.viewRender = function () {
     }
   });
 
+  var segments = this.board.snake.segments;
+  segments.forEach(function(segment){
+    for (var i = 0; i <= 20; i++) {
+      for (var j = 0; j <= 20; j++) {
+        if (segment.x === i && segment.y === j) {
+          this.$snake = $("li[pos='" + i + "," + j + "']");
+          this.$snake.addClass("snake2");
+        }
+        if (view.board.snake.head().x === i && view.board.snake.head().y === j) {
+          this.$head = $("li[pos='" + i + "," + j + "']");
+          this.$head.removeClass('snake2');
+          this.$head.addClass("head");
+        }
+      }
+    }
+  });
+
   this.$h1.text('Black Score: ' + this.board.count)
   this.$h1_2.text('Red Score: ' + this.board.opp)
 
@@ -117,14 +117,14 @@ View.prototype.viewRender = function () {
 
 
 View.prototype.step = function () {
-    this.board.snake.move();
     this.board.snake2.move();
-  if (this.board.snake.segments.length !== 0 && this.board.count < 20 && this.board.opp < 20) {
+    this.board.snake.move();
+  if (this.board.snake.segments.length !== 0 && this.board.count < 15 && this.board.opp < 15) {
     this.viewRender();
   } else {
     this.$el.empty();
     this.$over = $('<over>');
-    if (this.board.count === 20) {
+    if (this.board.count === 15) {
       this.$over.html("You Won! <br/> Final Score: " + this.board.count + "<br/><br/> Press Space to restart");
     } else {
       this.$over.html("Game Over <br/><br/><br/> Press Space to restart");
