@@ -97,10 +97,16 @@
 	  this.renderApple();
 	  // this.renderMines();
 	  this.$li = this.$el.find('li');
+	
 	  this.$h1 = $('<h1>');
 	  this.$el.append(this.$h1);
 	  this.$h1.addClass("count");
 	  this.$h1.text("SCORE: 0");
+	
+	  this.$h1_2 = $('<h1>');
+	  this.$el.append(this.$h1_2);
+	  this.$h1_2.addClass("count");
+	  this.$h1_2.text("Red Snake: 0");
 	};
 	
 	View.prototype.renderApple = function () {
@@ -159,7 +165,9 @@
 	    }
 	  });
 	
-	  this.$h1.text('SCORE: ' + this.board.count)
+	  this.$h1.text('Black Score: ' + this.board.count)
+	  this.$h1_2.text('Red Score: ' + this.board.opp)
+	
 	  this.renderApple();
 	  // this.renderMines();
 	
@@ -169,12 +177,16 @@
 	View.prototype.step = function () {
 	    this.board.snake.move();
 	    this.board.snake2.move();
-	  if (this.board.snake.segments.length !== 0) {
+	  if (this.board.snake.segments.length !== 0 && this.board.count < 20 && this.board.opp < 20) {
 	    this.viewRender();
 	  } else {
 	    this.$el.empty();
 	    this.$over = $('<over>');
-	    this.$over.html("Game Over <br/> Final Score: " + this.board.count + "<br/><br/> Press Space to restart");
+	    if (this.board.count === 20) {
+	      this.$over.html("You Won! <br/> Final Score: " + this.board.count + "<br/><br/> Press Space to restart");
+	    } else {
+	      this.$over.html("Game Over <br/><br/><br/> Press Space to restart");
+	    }
 	    this.$el.append(this.$over);
 	    this.$el.removeClass();
 	
@@ -279,7 +291,6 @@
 	};
 	
 	Snake.prototype.move = function () {
-	  var mineHit = false;
 	
 	  // this.board.mines.forEach(function(mine){
 	  //   if (mine.position.equals(this.head())) {
@@ -287,9 +298,7 @@
 	  //   }
 	  // }.bind(this));
 	
-	  if (mineHit) {
-	    this.segments = [];
-	  } else if (this.board.apple.position.equals(this.head()) &&
+	    if (this.board.apple.position.equals(this.head()) &&
 	      this.board.moveInBoard()) {
 	    this.board.apple.replace();
 	    // this.board.mines.push(new Mine(this.board));
@@ -360,7 +369,7 @@
 	
 	  if (this.board.apple.position.equals(this.head())) {
 	    this.board.apple.replace();
-	    this.board.count -= 1;
+	    this.board.opp += 1;
 	    this.segments.push(this.head().plus(Snake.DIFFS[this.direction]));
 	  } else {
 	  // } else if (this.board.moveInBoard()) {
@@ -462,6 +471,7 @@
 	  // this.mines = [];
 	  // this.mines.push(new Mine(this));
 	  this.count = 0;
+	  this.opp = 0;
 	}
 	
 	Board.prototype.moveInBoard = function () {

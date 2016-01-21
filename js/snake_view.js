@@ -39,10 +39,16 @@ View.prototype.setupViewGrid = function () {
   this.renderApple();
   // this.renderMines();
   this.$li = this.$el.find('li');
+
   this.$h1 = $('<h1>');
   this.$el.append(this.$h1);
   this.$h1.addClass("count");
   this.$h1.text("SCORE: 0");
+
+  this.$h1_2 = $('<h1>');
+  this.$el.append(this.$h1_2);
+  this.$h1_2.addClass("count");
+  this.$h1_2.text("Red Snake: 0");
 };
 
 View.prototype.renderApple = function () {
@@ -101,7 +107,9 @@ View.prototype.viewRender = function () {
     }
   });
 
-  this.$h1.text('SCORE: ' + this.board.count)
+  this.$h1.text('Black Score: ' + this.board.count)
+  this.$h1_2.text('Red Score: ' + this.board.opp)
+
   this.renderApple();
   // this.renderMines();
 
@@ -111,12 +119,16 @@ View.prototype.viewRender = function () {
 View.prototype.step = function () {
     this.board.snake.move();
     this.board.snake2.move();
-  if (this.board.snake.segments.length !== 0) {
+  if (this.board.snake.segments.length !== 0 && this.board.count < 20 && this.board.opp < 20) {
     this.viewRender();
   } else {
     this.$el.empty();
     this.$over = $('<over>');
-    this.$over.html("Game Over <br/> Final Score: " + this.board.count + "<br/><br/> Press Space to restart");
+    if (this.board.count === 20) {
+      this.$over.html("You Won! <br/> Final Score: " + this.board.count + "<br/><br/> Press Space to restart");
+    } else {
+      this.$over.html("Game Over <br/><br/><br/> Press Space to restart");
+    }
     this.$el.append(this.$over);
     this.$el.removeClass();
 

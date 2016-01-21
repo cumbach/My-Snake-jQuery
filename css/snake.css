@@ -1,9 +1,25 @@
-html, body, figure, figcaption, ul, li, h1 {
+html, body, figure, figcaption, ul, li, h1, h3 {
   margin: 0;
   padding: 0;
   border: 0;
   font: inherit;
   text-align: inherit;
+}
+
+.game-div {
+  margin: 0 auto;
+  float: center;
+}
+
+.instructions {
+
+  padding-left:10px;
+  text-align: left;
+  width: 180px;
+  border: 1px solid black;
+  background: green;
+  float: left;
+  height: 100%;
 }
 
 ul {
@@ -17,6 +33,7 @@ body {
   font-family: sans-serif;
   text-align: center;
   font-weight: bold;
+  padding-top: 20px;
 
 }
 
@@ -31,12 +48,19 @@ h1 {
   margin: 30px;
 }
 
+h3 {
+  font-size: 24px;
+}
+
 .snake-game {
   background: white;
   -webkit-background-size: cover;
 }
 
 figure {
+  width: 420px;
+  /*max-width:60%;*/
+  float: left;
   display: inline-block;
   border: 10px solid black;
   /*background: url("Umbach.jpg");

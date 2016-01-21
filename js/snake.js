@@ -81,7 +81,6 @@ Snake.prototype.isOccupying = function (array) {
 };
 
 Snake.prototype.move = function () {
-  var mineHit = false;
 
   // this.board.mines.forEach(function(mine){
   //   if (mine.position.equals(this.head())) {
@@ -89,9 +88,7 @@ Snake.prototype.move = function () {
   //   }
   // }.bind(this));
 
-  if (mineHit) {
-    this.segments = [];
-  } else if (this.board.apple.position.equals(this.head()) &&
+    if (this.board.apple.position.equals(this.head()) &&
       this.board.moveInBoard()) {
     this.board.apple.replace();
     // this.board.mines.push(new Mine(this.board));
@@ -162,7 +159,7 @@ Snake2.prototype.move = function () {
 
   if (this.board.apple.position.equals(this.head())) {
     this.board.apple.replace();
-    this.board.count -= 1;
+    this.board.opp += 1;
     this.segments.push(this.head().plus(Snake.DIFFS[this.direction]));
   } else {
   // } else if (this.board.moveInBoard()) {
@@ -264,6 +261,7 @@ function Board () {
   // this.mines = [];
   // this.mines.push(new Mine(this));
   this.count = 0;
+  this.opp = 0;
 }
 
 Board.prototype.moveInBoard = function () {
