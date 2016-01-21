@@ -105,15 +105,13 @@ li {
   object-fit: cover;
   -webkit-background-size: cover;
 }
-.head {
-  background: blue;
-  border-radius: 3px;
-  /*clip: rect(5px,5px,5px,5px)*/
-  -webkit-background-size: cover;
-  /*left: 50%;*/
-}
+
 
 .mine {
+  background: purple;
+}
+
+.snake.snake2 {
   background: purple;
 }
 
@@ -125,4 +123,12 @@ li {
   background: red;
   /*clip: rect(5px,5px,5px,5px)*/
   -webkit-background-size: cover;
+}
+
+.head {
+  background: blue;
+  border-radius: 3px;
+  /*clip: rect(5px,5px,5px,5px)*/
+  -webkit-background-size: cover;
+  /*left: 50%;*/
 }
