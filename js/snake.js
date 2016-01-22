@@ -28,7 +28,7 @@ Apple.prototype.replace = function () {
   var x = Math.floor(Math.random() * 20);
   var y = Math.floor(Math.random() * 20);
 
-  while (this.board.snake.isOccupying([x,y])) {
+  while (this.board.snake.isOccupying([x,y]) || this.board.snake2.isOccupying([x,y])) {
     x = Math.floor(Math.random() * 20);
     y = Math.floor(Math.random() * 20);
   }

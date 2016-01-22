@@ -177,12 +177,12 @@
 	View.prototype.step = function () {
 	    this.board.snake2.move();
 	    this.board.snake.move();
-	  if (this.board.snake.segments.length !== 0 && this.board.count < 15 && this.board.opp < 15) {
+	  if (this.board.snake.segments.length !== 0 && this.board.count < 20 && this.board.opp < 20) {
 	    this.viewRender();
 	  } else {
 	    this.$el.empty();
 	    this.$over = $('<over>');
-	    if (this.board.count === 15) {
+	    if (this.board.count === 20) {
 	      this.$over.html("You Won! <br/> Final Score: " + this.board.count + "<br/><br/> Press Space to restart");
 	    } else {
 	      this.$over.html("Game Over <br/><br/><br/> Press Space to restart");
@@ -238,7 +238,7 @@
 	  var x = Math.floor(Math.random() * 20);
 	  var y = Math.floor(Math.random() * 20);
 	
-	  while (this.board.snake.isOccupying([x,y])) {
+	  while (this.board.snake.isOccupying([x,y]) || this.board.snake2.isOccupying([x,y])) {
 	    x = Math.floor(Math.random() * 20);
 	    y = Math.floor(Math.random() * 20);
 	  }
