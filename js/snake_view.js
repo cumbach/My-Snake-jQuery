@@ -1,11 +1,13 @@
 var Board = require('./snake.js');
 
+var intervalID;
+
 var View = function($el) {
   this.$el = $el;
   this.board = new Board();
   this.setupViewGrid();
+  intervalID = window.setInterval(this.step.bind(this), 110);
   $(window).on("keydown", this.handleKeyEvent.bind(this));
-  this.intervalID = window.setInterval(this.step.bind(this), 110);
 };
 
 var KEYCODES = {
@@ -18,8 +20,8 @@ var KEYCODES = {
 
 View.prototype.handleKeyEvent = function (event) {
   if (KEYCODES[event.keyCode] === "SPACE") {
+    window.clearInterval(intervalID);
     this.$el.empty();
-    window.clearInterval(this.intervalID);
     new View(this.$el);
   }
   this.board.snake.turn(KEYCODES[event.keyCode]);
